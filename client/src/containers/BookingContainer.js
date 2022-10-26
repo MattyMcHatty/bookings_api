@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from "react";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import { getBookings, putBooking } from "../components/BookingsService";
-import BookingsForm from "../components/BookingsForm";
-import BookingsList from "../components/BookingsList";
+import BookingsHome from "../components/BookingsHome";
+import NavBar from "../components/NavBar";
+import TicTacToe from "../components/TicTacToe";
 
 const BookingContainer = () => {
 
@@ -40,8 +42,13 @@ const BookingContainer = () => {
 
     return(
         <main>
-            <BookingsForm addBooking={addBooking} />
-            <BookingsList bookings={bookings} removeBooking={removeBooking} handleCheckIn={handleCheckIn}/>
+            <Router>
+                <NavBar />
+                <Routes>
+                    <Route exact path="/" element={<BookingsHome addBooking={addBooking} bookings={bookings} removeBooking={removeBooking} handleCheckIn={handleCheckIn}/>} />
+                    <Route exact path="tictactoe" element={<TicTacToe />} />
+                </Routes>
+            </Router>
         </main>
     )
 };

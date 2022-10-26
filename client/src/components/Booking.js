@@ -9,11 +9,18 @@ const Booking = ({booking, removeBooking, handleCheckIn}) => {
     }
 
     var inOrOut = ""
-    if(booking.checkedIn === true){
+    if(booking.checkedIn){
         inOrOut = "Checked In"
     } else {
         inOrOut = "Not Arrived"
     };
+
+    var checkInButtonText = ""
+    if(booking.checkedIn){
+        checkInButtonText = "Check Out"
+    } else {
+        checkInButtonText = "Check In"
+    }
 
     const handleClick = event => {
         handleCheckIn(booking._id)
@@ -26,7 +33,7 @@ const Booking = ({booking, removeBooking, handleCheckIn}) => {
             <div>eMail: {booking.email} </div>
             <div> Checked in: {inOrOut}</div>
             <button onClick={handleDelete}> 🗑 </button>
-            <button onClick={handleClick}> Check In </button>
+            <button onClick={handleClick}> {checkInButtonText} </button>
             <hr></hr>
         
         </>
