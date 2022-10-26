@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { getBookings } from "../components/BookingsService";
+import { getBookings, putBooking } from "../components/BookingsService";
 import BookingsForm from "../components/BookingsForm";
 import BookingsList from "../components/BookingsList";
 
@@ -29,9 +29,13 @@ const BookingContainer = () => {
     const handleCheckIn = (id) => {
         const updatedBookings = bookings.map((booking) => {
             return booking._id === id
-                ? {...booking, checkedIn: !booking.checkedIn} : booking
+                ? {...booking, checkedIn: !booking.checkedIn} : booking;
         })
         setBookings(updatedBookings);
+        const filteredBooking = updatedBookings.filter((booking)=>{return booking._id===id})
+        putBooking(filteredBooking);
+
+        
     }
 
     return(
